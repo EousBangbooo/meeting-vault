@@ -4,7 +4,7 @@ Turn recorded meetings into a **searchable archive** and **reusable knowledge** 
 
 Small, file-based toolkit: a macOS clipboard watcher, an archive script with SHA-256 dedupe, an index builder, and a set of prompts that turn transcripts into five kinds of assets.
 
-Open `会议处理.md` in your vault to see what is waiting for review, which findings need your approval, and what you accepted. The optional macOS watcher notifies you when it saves a transcript and sends a daily reminder while work is pending. You choose and start the human or AI reviewer. Approved findings are saved in `knowledge/已确认/`.
+Open `会议处理.html` in your vault to see counts for unstarted, started, awaiting approval, disputed, and completed meetings. Copy a short instruction for a single transcript and send it to your file-capable AI. A second review is optional. Conflicting findings require a human decision before approval. Approved findings are saved in `knowledge/已确认/`.
 
 ## Why
 
@@ -38,6 +38,7 @@ python3 bin/reindex.py --root "$MEETING_KB" --out "$MEETING_KB/index"
 ```
 $MEETING_KB/
 ├── 会议处理.md        review status, evidence and accepted findings
+├── 会议处理.html      visual queue and single-meeting review instructions
 ├── raw/meetings/      transcripts, append-only
 ├── inbox/             clipboard drop zone
 ├── index/             generated index + audit report

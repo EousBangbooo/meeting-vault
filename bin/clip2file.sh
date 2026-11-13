@@ -77,7 +77,7 @@ handle() {
   echo "$h" >> "$HASHES"
   echo "$(ts) saved $name ($(wc -l < "$dest" | tr -d ' ') lines)" >> "$LOG"
   if python3 "$DIR/review.py" --root "$KB" status >>"$LOG" 2>&1; then
-    [ "${2:-}" = quiet ] || notify "已保存，等待判断。打开会议库中的「会议处理.md」。"
+    [ "${2:-}" = quiet ] || notify "已保存，等待判断。打开会议库中的「会议处理.html」。"
   else
     [ "${2:-}" = quiet ] || notify "转写已保存，处理页刷新失败。请查看本机日志。"
   fi

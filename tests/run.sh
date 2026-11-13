@@ -51,18 +51,32 @@ grep -q "2026-11-12" "$MEETING_KB/index/会议索引.md" || { echo "FAIL: index 
 BOARD="$MEETING_KB/会议处理.md"
 TRANSCRIPT=$(basename "$MEETING_KB"/inbox/*.txt)
 grep -q '待判断（1）' "$BOARD"
+grep -q '未启动判断 <span>1</span>' "$MEETING_KB/会议处理.html"
+grep -q '复制审阅指令' "$MEETING_KB/会议处理.html"
 review() { python3 "$ROOT/bin/review.py" "$@"; }
 [[ $(review remind) == *'1 场待判断'* ]]
 [[ -z $(review remind) ]]
+review begin "$TRANSCRIPT"
+review begin "$TRANSCRIPT"
+grep -q '已启动，等结果 <span>1</span>' "$MEETING_KB/会议处理.html"
 
 cat > "$TMP/review.json" <<'EOF'
-{"reviewer":"测试判断人","reason":"收集活动反馈是已商定的事项。","items":[{"kind":"待办","statement":"活动后收集意见","evidence":"我们再收集参加者对时间、地点和流程的意见"}]}
+{"reviewer":"测试判断人","model":"虚构模型甲","reason":"收集活动反馈是已商定的事项。","items":[{"kind":"待办","statement":"活动后收集意见","evidence":"我们再收集参加者对时间、地点和流程的意见"}]}
 EOF
 review record "$TRANSCRIPT" "$TMP/review.json"
 grep -q '待你确认（1）' "$BOARD"
 grep -q '测试判断人' "$BOARD"
 grep -q '我们再收集参加者对时间、地点和流程的意见' "$BOARD"
 test ! -d "$MEETING_KB/knowledge/已确认"
+printf '{"reviewer":"复核人","model":"虚构模型乙","reason":"没有明确负责人","items":[]}\n' > "$TMP/second.json"
+review compare "$TRANSCRIPT" "$TMP/second.json"
+grep -q '判断有分歧 <span>1</span>' "$MEETING_KB/会议处理.html"
+grep -q '虚构模型乙' "$MEETING_KB/会议处理.html"
+if review confirm "$TRANSCRIPT" 1; then
+  echo 'FAIL: approved an unresolved disagreement'
+  exit 1
+fi
+review resolve "$TRANSCRIPT" 1
 review confirm "$TRANSCRIPT" 1
 review confirm "$TRANSCRIPT" 1
 review record "$TRANSCRIPT" "$TMP/review.json"

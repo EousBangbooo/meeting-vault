@@ -18,6 +18,7 @@ LABEL="com.meeting-vault.clip2file"
 mkdir -p "$BIN_DIR" "$HOME/Library/LaunchAgents" "$KB/inbox"
 cp "$DIR/clip2file.sh" "$BIN_DIR/clip2file.sh"
 cp "$DIR/review.py" "$BIN_DIR/review.py"
+cp "$DIR/review_board.py" "$BIN_DIR/review_board.py"
 chmod +x "$BIN_DIR/clip2file.sh"
 
 cat > "$PLIST" <<PLIST
@@ -51,4 +52,4 @@ launchctl enable "gui/$(id -u)/$LABEL" 2>/dev/null || true
 echo "installed: $LABEL"
 echo "inbox:  $KB/inbox"
 echo "log:    $BIN_DIR/clip2file.log"
-echo "test:   复制一段转写，打开 $KB/会议处理.md 查看待判断状态"
+echo "test:   复制一段转写，打开 $KB/会议处理.html 查看待判断状态"
