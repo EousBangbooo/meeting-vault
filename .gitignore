@@ -1,0 +1,5 @@
+# local vault (if you keep it inside the repo)
+vault/
+*.log
+.DS_Store
+__pycache__/
