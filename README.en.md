@@ -6,6 +6,8 @@ Small, file-based toolkit: a macOS clipboard watcher, an archive script with SHA
 
 Open `会议处理.html` in your vault to see counts for unstarted, started, awaiting approval, disputed, and completed meetings. Copy a short instruction for a single transcript and send it to your file-capable AI. A second review is optional. Conflicting findings require a human decision before approval. Approved findings are saved in `knowledge/已确认/`.
 
+The optional [macOS status panel](macos-panel/README.md#english) shows the review queue in a compact floating window, with a menu bar entry to restore it. It reads the same vault as the HTML dashboard.
+
 ## Why
 
 Most teams record every meeting, store the transcript, and never read it again. The archive grows; the experience doesn't. This project is built around four ideas:

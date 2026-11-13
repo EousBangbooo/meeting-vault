@@ -3,3 +3,10 @@ vault/
 *.log
 .DS_Store
 __pycache__/
+
+# macOS panel build and generated test data
+/macos-panel/.build/
+/macos-panel/MeetingVaultPanel.app/
+/macos-panel/fixtures/expected.json
+/macos-panel/fixtures/permission-vault/
+/macos-panel/证据/
